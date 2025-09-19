@@ -12,13 +12,43 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
+		"chatParticipants": [
+			{
+				"id": "chat-sample.cat",
+				"fullName": "Cat",
+				"name": "cat",
+				"description": "Meow! What can I teach you?",
+				"isSticky": true,
+				"commands": [
+					{
+						"name": "randomTeach",
+						"description": "Pick at random a computer science concept then explain it in purfect way of a cat"
+					}
+				],
+				"disambiguation": [
+					{
+						"category": "cat",
+						"description": "The user wants to learn a specific computer science topic in an informal way.",
+						"examples": [
+							"Teach me C++ pointers using metaphors",
+							"Explain to me what is a linked list in a simple way",
+							"Can you explain to me what is a function in programming?"
+						]
+					}
+				]
+			}
+		],
+		"commands": [
+			{
+				"command": "MyCommand",
+				"title": "MyCommand"
+			},
       {
-        "command": "CodeGenTool.helloWorld",
-        "title": "Hello World"
-      }
-    ]
-  },
+				"command": "MyCommandText",
+				"title": "MyCommandText"
+			}
+		]
+	},
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",

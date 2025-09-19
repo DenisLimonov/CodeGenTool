@@ -1,25 +1,38 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { simpleParticipant, textEditorCommand } from './commands/chat';
+import { getLogger } from './Helpers/Logger';
+import { getAIHandler } from './AIConfigurations/AIHandler';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "CodeGenTool" is now active!');
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('CodeGenTool.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from CodeGenTool!');
-	});
+	const chatParticipant: vscode.ChatParticipant = getAIHandler();
+	const logger = getLogger();
 
-	context.subscriptions.push(disposable);
+	const idk = vscode.commands.registerCommand('MyCommand', simpleParticipant);
+	const idk2 = vscode.commands.registerTextEditorCommand('MyCommandText', textEditorCommand);
+	
+
+	context.subscriptions.push(
+		chatParticipant.onDidReceiveFeedback(
+			(feedback: vscode.ChatResultFeedback) => {
+				// Log chat result feedback to be able to compute the success matric of the participant
+				// unhelpful / totalRequests is a good success metric
+				logger.logUsage("chatResultFeedback", {
+					kind: feedback.kind,
+				});
+			}
+		)
+	);
+	context.subscriptions.push(idk);
+	context.subscriptions.push(idk2);
+	context.subscriptions.push(chatParticipant);
+	context.subscriptions.push(logger);
 }
 
 // This method is called when your extension is deactivated
