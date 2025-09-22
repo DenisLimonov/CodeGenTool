@@ -12,43 +12,43 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
-		"chatParticipants": [
-			{
-				"id": "chat-sample.cat",
-				"fullName": "Cat",
-				"name": "cat",
-				"description": "Meow! What can I teach you?",
-				"isSticky": true,
-				"commands": [
-					{
-						"name": "randomTeach",
-						"description": "Pick at random a computer science concept then explain it in purfect way of a cat"
-					}
-				],
-				"disambiguation": [
-					{
-						"category": "cat",
-						"description": "The user wants to learn a specific computer science topic in an informal way.",
-						"examples": [
-							"Teach me C++ pointers using metaphors",
-							"Explain to me what is a linked list in a simple way",
-							"Can you explain to me what is a function in programming?"
-						]
-					}
-				]
-			}
-		],
-		"commands": [
-			{
-				"command": "MyCommand",
-				"title": "MyCommand"
-			},
+    "chatParticipants": [
       {
-				"command": "MyCommandText",
-				"title": "MyCommandText"
-			}
-		]
-	},
+        "id": "chat-sample.cat",
+        "fullName": "Cat",
+        "name": "cat",
+        "description": "Meow! What can I teach you?",
+        "isSticky": true,
+        "commands": [
+          {
+            "name": "randomTeach",
+            "description": "Pick at random a computer science concept then explain it in purfect way of a cat"
+          }
+        ],
+        "disambiguation": [
+          {
+            "category": "cat",
+            "description": "The user wants to learn a specific computer science topic in an informal way.",
+            "examples": [
+              "Teach me C++ pointers using metaphors",
+              "Explain to me what is a linked list in a simple way",
+              "Can you explain to me what is a function in programming?"
+            ]
+          }
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "MyCommand",
+        "title": "MyCommand"
+      },
+      {
+        "command": "MyCommandText",
+        "title": "MyCommandText"
+      }
+    ]
+  },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
@@ -58,14 +58,17 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.104.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
+    "@types/vscode": "^1.104.0",
     "@typescript-eslint/eslint-plugin": "^8.42.0",
     "@typescript-eslint/parser": "^8.42.0",
-    "eslint": "^9.34.0",
-    "typescript": "^5.9.2",
     "@vscode/test-cli": "^0.0.11",
-    "@vscode/test-electron": "^2.5.2"
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.34.0",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "langchain": "^0.3.34"
   }
 }

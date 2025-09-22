@@ -1,9 +1,5 @@
 import * as vscode from "vscode";
 
-export function simpleParticipant(context: vscode.ExtensionContext) {
-    // Register the command handler for the /meow followup
-}
-
 export async function textEditorCommand(textEditor: vscode.TextEditor){
     // Replace all variables in active editor with cat names and words
     const text = textEditor.document.getText();
