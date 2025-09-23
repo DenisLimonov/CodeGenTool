@@ -20,13 +20,15 @@ export async function textEditorCommand(textEditor: vscode.TextEditor){
 
         const messages = [
             vscode.LanguageModelChatMessage
-                .User(`You are a cat! Think carefully and step by step like a cat would.
-                    Your job is to replace all variable names in the following code with funny cat variable names. Be creative. IMPORTANT respond just with code. Do not use markdown!`),
+                .User(`You are a farmer. 
+                    Your job is to replace all variable names in the following code with fruit names. Be creative. 
+                    Then add a comment how many script.ts and index.js files there are in the workspace. 
+                    IMPORTANT respond just with code. Do not use markdown!`),
             vscode.LanguageModelChatMessage.User(text),
         ];
         chatResponse = await model.sendRequest(
             messages,
-            {},
+            {tools: [{name: 'chat-tools-find_files', description: 'Find files in the workspace'}]},
             new vscode.CancellationTokenSource().token
         );
     } catch (err) {

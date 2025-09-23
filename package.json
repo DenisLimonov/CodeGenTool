@@ -14,38 +14,60 @@
   "contributes": {
     "chatParticipants": [
       {
-        "id": "chat-sample.cat",
-        "fullName": "Cat",
-        "name": "cat",
-        "description": "Meow! What can I teach you?",
-        "isSticky": true,
-        "commands": [
-          {
-            "name": "randomTeach",
-            "description": "Pick at random a computer science concept then explain it in purfect way of a cat"
-          }
-        ],
-        "disambiguation": [
-          {
-            "category": "cat",
-            "description": "The user wants to learn a specific computer science topic in an informal way.",
-            "examples": [
-              "Teach me C++ pointers using metaphors",
-              "Explain to me what is a linked list in a simple way",
-              "Can you explain to me what is a function in programming?"
-            ]
-          }
-        ]
-      }
+        "id": "chat-participants-participantWithButtonCommand",
+        "name": "participantWithButtonCommand",
+        "fullName": "Participant with button command",
+        "description": "Description here",
+        "isSticky": true
+      },
+      {
+				"id": "chat-participants-participantWithTool",
+				"fullName": "Tool User",
+				"name": "participantWithTool",
+				"description": "I use tools",
+				"isSticky": true,
+				"commands": [
+					{
+						"name": "list",
+						"description": "List all available tools"
+					},
+					{
+						"name": "all",
+						"description": "Use all registered tools. By default, only this extension's tools are used."
+					}
+				]
+			}
     ],
     "commands": [
       {
-        "command": "MyCommand",
-        "title": "MyCommand"
-      },
-      {
         "command": "MyCommandText",
         "title": "MyCommandText"
+      }
+    ],
+    "languageModelTools": [
+      {
+        "name": "chat-tools-find_files",
+        "tags": [
+          "files",
+          "search",
+          "chat-tools"
+        ],
+        "toolReferenceName": "findFiles",
+        "displayName": "Find Files",
+        "modelDescription": "Search for files in the current workspace",
+        "canBeReferencedInPrompt": true,
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "pattern": {
+              "type": "string",
+              "description": "Search for files that match this glob pattern"
+            }
+          },
+          "required": [
+            "pattern"
+          ]
+        }
       }
     ]
   },
@@ -60,6 +82,7 @@
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
+    "@types/react": "^19.1.13",
     "@types/vscode": "^1.104.0",
     "@typescript-eslint/eslint-plugin": "^8.42.0",
     "@typescript-eslint/parser": "^8.42.0",
@@ -69,6 +92,8 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "langchain": "^0.3.34"
+    "@vscode/prompt-tsx": "^0.4.0-alpha.5",
+    "langchain": "^0.3.34",
+    "react": "^19.1.1"
   }
 }
